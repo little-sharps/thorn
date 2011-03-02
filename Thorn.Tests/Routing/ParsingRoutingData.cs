@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using SharpTestsEx;
 
-namespace Thorn.Tests
+namespace Thorn.Tests.Routing
 {
     public static class Matchers
     {
@@ -38,7 +36,7 @@ namespace Thorn.Tests
     }
 
     [TestFixture]
-    public class RoutingData
+    public class ParsingRoutingData
     {
         [Test]
         public void ItShouldComeUpEmptyOnAnEmptyString()

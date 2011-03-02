@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
+﻿using System.Dynamic;
 using System.Linq;
 using System.Text;
 
@@ -31,6 +29,20 @@ namespace Thorn
             result.Args = args.Skip(1).ToArray();
 
             return result;
+        }
+
+        public static IThornConfigurationHelper ConfigureHandlers()
+        {
+            return new ThornConfigurationHelper();
+        }
+
+        private static IThornConfiguration _configuration;
+        public static IThornConfiguration Configuration
+        {
+            get
+            {
+                return _configuration = _configuration ?? new ThornConfiguration();
+            }
         }
     }
 }
