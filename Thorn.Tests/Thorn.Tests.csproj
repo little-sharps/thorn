@@ -50,19 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\AttributeBasedConfiguration.cs" />
-    <Compile Include="Configuration\DefaultConventions.cs" />
-    <Compile Include="Routing\ParsingRoutingData.cs" />
+    <Compile Include="Configuration\GettingExportedActions.cs" />
+    <Compile Include="Configuration\MemberScanning.cs" />
+    <Compile Include="Configuration\TypeScanning.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routing\Routing.cs" />
+    <Compile Include="ScanningFodder\Fodder.cs" />
+    <Compile Include="ScanningFodder\NonFodder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Thorn.Tests.SampleHandlers\Thorn.Tests.SampleHandlers.csproj">
-      <Project>{8DDB3497-C8C5-4B5E-A1C1-F8548074B9FD}</Project>
-      <Name>Thorn.Tests.SampleHandlers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\thorn\Thorn.csproj">
       <Project>{E2D067F2-271D-4CE0-9D65-E99E040718AD}</Project>
       <Name>Thorn</Name>
