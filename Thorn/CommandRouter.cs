@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace Thorn
 {
-    public class CommandRouter : ICommandRouter
+    public class CommandRouter
     {
         private IList<CommandRoute> _routes = new List<CommandRoute>();
+        private Type _defaultReceiver;
 
-        public CommandRouter(IEnumerable<IAction> actions)
+        public CommandRouter(IEnumerable<Action> actions)
         {
             foreach (var action in actions)
             {
@@ -17,47 +17,62 @@ namespace Thorn
             }
         }
 
-        public IAction FindAction(string command)
+        public CommandRouter(IEnumerable<Action> actions, Type defaultReceiver) : this(actions)
         {
-            var parts = command.Split(':');
-            CommandRoute route;
-            
-            if (parts.Count() > 1)
+            _defaultReceiver = defaultReceiver;
+        }
+
+        public Action FindAction(string command)
+        {
+            RoutingInfo parsedRoutingInfo = ParseRoutingInfo(command);
+
+            foreach (var route in _routes)
             {
-                route = _routes.AsQueryable().Where(r => r.CommandName == parts[1] && r.Scope == parts[0]).First();
+                if (route.RoutingInfo == parsedRoutingInfo)
+                {
+                    return route.Action;
+                }
+            }
+
+            throw new RoutingException(command);
+        }
+
+        private RoutingInfo ParseRoutingInfo(string command)
+        {
+            string scope, target;
+
+            if (command.Contains(':'))
+            {
+                var parts = command.Split(':');
+                scope = parts[0];
+                target = parts[1];
             }
             else
             {
-                route = _routes.AsQueryable().Where(r => r.CommandName == parts[0]).First();
+                scope = _defaultReceiver == null ? String.Empty : _defaultReceiver.Name;
+                target = command;
             }
-            
-            return route.Action;
+
+            return new RoutingInfo(scope, target);
         }
 
         private class CommandRoute
         {
-            private readonly string _scope;
-            private readonly string _commandName;
-            private readonly IAction _action;
+            private readonly Action _action;
+            private readonly RoutingInfo _routingInfo;
 
-            public CommandRoute(IAction action)
+            public CommandRoute(Action action)
             {
-                _scope = action.Type.Name.ToLower();
-                _commandName = action.Method.Name.ToLower();
                 _action = action;
+                _routingInfo = action.GetRoutingInfo();
             }
 
-            public string Scope
+            public RoutingInfo RoutingInfo
             {
-                get { return _scope; }
+                get { return _routingInfo; }
             }
 
-            public string CommandName
-            {
-                get { return _commandName; }
-            }
-
-            public IAction Action
+            public Action Action
             {
                 get { return _action; }
             }

@@ -35,9 +35,9 @@ namespace Thorn
                 .ToArray();
         }
 
-        public IEnumerable<IAction> GetActionsFrom(Assembly assembly)
+        public IEnumerable<Action> GetActionsFrom(Assembly assembly)
         {
-            var result = new List<IAction>();
+            var result = new List<Action>();
 
             foreach (var type in GetDecoratedTypesIn(assembly))
             {
@@ -50,9 +50,9 @@ namespace Thorn
             return result;
         }
 
-        public IEnumerable<IAction> GetActionsFrom(Assembly assembly, string @namespace)
+        public IEnumerable<Action> GetActionsFrom(Assembly assembly, string @namespace)
         {
-            var result = new List<IAction>();
+            var result = new List<Action>();
 
             foreach (var type in GetDecoratedTypesIn(assembly, @namespace))
             {
@@ -65,7 +65,7 @@ namespace Thorn
             return result;
         }
 
-        private IAction BuildAction(Type type, MethodInfo methodInfo)
+        private Action BuildAction(Type type, MethodInfo methodInfo)
         {
             return new Action(type, methodInfo);
         }

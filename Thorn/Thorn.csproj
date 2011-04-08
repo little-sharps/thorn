@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Args">
+      <HintPath>..\packages\Args.1.0.3\lib\Net40\Args.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -40,13 +43,20 @@
   <ItemGroup>
     <Compile Include="Action.cs" />
     <Compile Include="CommandRouter.cs" />
-    <Compile Include="IAction.cs" />
-    <Compile Include="ICommandRouter.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="IPreprocessor.cs" />
+    <Compile Include="Preprocessors\CommandHelpPreprocessor.cs" />
+    <Compile Include="Preprocessors\IndexPreprocessor.cs" />
+    <Compile Include="Exceptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AssemblyScanner.cs" />
+    <Compile Include="RoutingInfo.cs" />
+    <Compile Include="Runner.cs" />
     <Compile Include="ThornExportAttribute.cs" />
     <Compile Include="ThornIgnoreAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
