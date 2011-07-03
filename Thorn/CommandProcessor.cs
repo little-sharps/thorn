@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Thorn.Config;
 
 namespace Thorn
@@ -17,9 +15,13 @@ namespace Thorn
 			var export = router.FindExport(command);
 
 			var target = config.InstantiationStrategy.Instantiate(export.Type);
+			
 			var parameters = new List<object>();
-			parameters.Add(config.ParameterBinder.BuildParameter(export.ParameterType, args));
-
+			if (export.ParameterType != null)
+			{
+				parameters.Add(config.ParameterBinder.BuildParameter(export.ParameterType, args));
+			}
+			
 			export.Method.Invoke(target, parameters.ToArray());
 		}
 	}

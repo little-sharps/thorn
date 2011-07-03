@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandProcessor.cs" />
     <Compile Include="Conventions\ArgsHelpProvider.cs" />
     <Compile Include="Conventions\IParameterBinder.cs" />
     <Compile Include="Conventions\IParameterHelpProvider.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Conventions\ITypeInstantiationStrategy.cs" />
     <Compile Include="Conventions\ITypeScanningConvention.cs" />
     <Compile Include="CommandHelpPreprocessor.cs" />
+    <Compile Include="TypeScanner.cs" />
     <Compile Include="UsagePreprocessor.cs" />
     <Compile Include="Exceptions\InvocationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,9 +82,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Routing\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

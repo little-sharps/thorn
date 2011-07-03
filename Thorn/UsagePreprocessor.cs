@@ -12,20 +12,27 @@ namespace Thorn
 			{
 				var executableName = Assembly.GetEntryAssembly().GetName().Name;
 
+				Console.WriteLine();
 				Console.WriteLine("Usage:");
 				Console.WriteLine("  {0} [command] [/flag1 [flag1value]] [/flag2 [...]]...", executableName);
 				Console.WriteLine();
 				Console.WriteLine("{0} understands the following commands:", executableName);
+				Console.WriteLine();
 
 				foreach (var export in config.RoutingInfo.Exports)
 				{
-					Console.WriteLine("  {0}:{1}\t{2}", export.Namespace, export.Name, export.Description);
+					if (export.Namespace == config.RoutingInfo.DefaultNamespace)
+					{
+						Console.WriteLine("  {0} - {1}", export.Name, export.Description);
+					}
+					else
+					{
+						Console.WriteLine("  {0}:{1} - {2}", export.Namespace, export.Name, export.Description);
+					}
 				}
 
 				Console.WriteLine();
-				Console.WriteLine("For info on a particular command, try:");
-				Console.WriteLine("  {0} help <command>", executableName);
-				Console.WriteLine();
+				Console.WriteLine("For info on a particular command, try: '{0} help <command>'", executableName);
 
 				return true;
 			}

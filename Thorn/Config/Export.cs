@@ -49,7 +49,11 @@ namespace Thorn.Config
 
 		public Type ParameterType
 		{
-			get { return _method.GetParameters()[0].ParameterType; }
+			get
+			{
+				if (_method.GetParameters().Count() == 0) return null;
+				return _method.GetParameters()[0].ParameterType;
+			}
 		}
 
 		public void Validate()
