@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
-namespace Thorn
+namespace Thorn.Config
 {
-	public interface ITypeSource
+	internal interface ITypeSource
 	{
 		IQueryable<Type> Types { get; }
 	}

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Reflection;
+using Thorn.Conventions;
 
-namespace Thorn
+namespace Thorn.Config
 {
 	public interface IConfigurationHelper
 	{
@@ -11,10 +12,10 @@ namespace Thorn
 		void DoNotScan();
 
 		void UseTypeScanningConvention(ITypeScanningConvention typeScanningConvention);
-		void UseMemberScanningConvention(IMemberScanningConvention memberScanningConvention);
 
 		void Export<TExport>();
 		void Export(Type type);
+		void Export(Export export);
 
 		void UseCommonServiceLocatorToInstantiateExports();
 		void UseDefaultConstructorToInstantiateExports();

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Thorn
+namespace Thorn.Conventions
 {
 	internal class DefaultConstructorInstantiationStrategy : ITypeInstantiationStrategy
 	{

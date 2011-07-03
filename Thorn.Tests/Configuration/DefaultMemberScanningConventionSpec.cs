@@ -2,6 +2,7 @@
 using System.Reflection;
 using NUnit.Framework;
 using SharpTestsEx;
+using Thorn.Conventions;
 
 namespace Thorn.Tests.Configuration
 {
@@ -14,7 +15,7 @@ namespace Thorn.Tests.Configuration
 			var scanner = new DefaultMemberScanningConvention();
 			var type = typeof(ScanningFodder.Fodder);
 
-			var actions = scanner.GetActions(type);
+			var actions = scanner.MethodsToExport(type);
 
 			var expected = type.GetMethod("Bantha");
 
@@ -27,7 +28,7 @@ namespace Thorn.Tests.Configuration
 			var scanner = new DefaultMemberScanningConvention();
 			var type = typeof(ScanningFodder.Fodder);
 
-			var actions = scanner.GetActions(type);
+			var actions = scanner.MethodsToExport(type);
 
 			var expected = type.GetMethod("ToString");
 
@@ -41,7 +42,7 @@ namespace Thorn.Tests.Configuration
 			var scanner = new DefaultMemberScanningConvention();
 			var type = typeof(ScanningFodder.Fodder);
 
-			var actions = scanner.GetActions(type);
+			var actions = scanner.MethodsToExport(type);
 			var expected = type.GetMethod("Ignored");
 
 			actions.Select(a => a.Method).Should().Not.Contain(expected);

@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Reflection;
 
-namespace Thorn
+namespace Thorn.Config
 {
-	public class AssemblyScanTypeSource : ITypeSource
+	internal class AssemblyScanTypeSource : ITypeSource
 	{
 		public AssemblyScanTypeSource(Assembly assembly, string @namespace)
 		{

@@ -36,42 +36,52 @@
       <HintPath>..\packages\Args.1.0.3\lib\Net40\Args.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Action.cs" />
-    <Compile Include="AssemblyScanTypeSource.cs" />
+    <Compile Include="Conventions\ArgsHelpProvider.cs" />
+    <Compile Include="Conventions\IParameterBinder.cs" />
+    <Compile Include="Conventions\IParameterHelpProvider.cs" />
+    <Compile Include="Exceptions\ConfigurationException.cs" />
+    <Compile Include="Exceptions\RoutingException.cs" />
+    <Compile Include="ArgsHelper.cs" />
+    <Compile Include="Conventions\ArgsParameterBinder.cs" />
+    <Compile Include="Config\Export.cs" />
+    <Compile Include="Config\AssemblyScanTypeSource.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandRouter.cs" />
-    <Compile Include="CommonServiceLocatorInstantiationStrategy.cs" />
-    <Compile Include="Configuration.cs" />
-    <Compile Include="ConfigurationBuilder.cs" />
-    <Compile Include="ConfigurationPlan.cs" />
-    <Compile Include="DefaultConstructorInstantiationStrategy.cs" />
-    <Compile Include="DefaultMemberScanningConvention.cs" />
-    <Compile Include="DefaultTypeScanningConvention.cs" />
-    <Compile Include="Export.cs" />
+    <Compile Include="Conventions\CommonServiceLocatorInstantiationStrategy.cs" />
+    <Compile Include="Config\Configuration.cs" />
+    <Compile Include="Config\ConfigurationBuilder.cs" />
+    <Compile Include="Config\ConfigurationPlan.cs" />
+    <Compile Include="Conventions\DefaultConstructorInstantiationStrategy.cs" />
+    <Compile Include="Conventions\DefaultTypeScanningConvention.cs" />
+    <Compile Include="Config\RoutingInfo.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="IConfigurationHelper.cs" />
-    <Compile Include="IMemberScanningConvention.cs" />
-    <Compile Include="IPreprocessor.cs" />
+    <Compile Include="Config\IConfigurationHelper.cs" />
     <Compile Include="IRunner.cs" />
-    <Compile Include="ITypeInstantiationStrategy.cs" />
-    <Compile Include="ITypeScanningConvention.cs" />
-    <Compile Include="Preprocessors\CommandHelpPreprocessor.cs" />
-    <Compile Include="Preprocessors\IndexPreprocessor.cs" />
-    <Compile Include="Exceptions.cs" />
+    <Compile Include="Conventions\ITypeInstantiationStrategy.cs" />
+    <Compile Include="Conventions\ITypeScanningConvention.cs" />
+    <Compile Include="CommandHelpPreprocessor.cs" />
+    <Compile Include="UsagePreprocessor.cs" />
+    <Compile Include="Exceptions\InvocationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runner.cs" />
     <Compile Include="RunnerInternal.cs" />
     <Compile Include="ThornExportAttribute.cs" />
     <Compile Include="ThornIgnoreAttribute.cs" />
-    <Compile Include="ITypeSource.cs" />
+    <Compile Include="Config\ITypeSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Routing\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Thorn.Conventions;
 
-namespace Thorn
+namespace Thorn.Config
 {
 	internal class ConfigurationPlan : IConfigurationHelper
 	{
 		readonly List<ITypeSource> _sources = new List<ITypeSource>();
-		readonly List<Type> _specifiedExports = new List<Type>();
+		readonly List<Type> _specifiedTypes = new List<Type>();
+		readonly List<Export> _additionalExports = new List<Export>();
 		ITypeScanningConvention _typeScanningConvention;
-		IMemberScanningConvention _memberScanningConvention;
 		ITypeInstantiationStrategy _typeInstantiationStrategy;
 		string _defaultNamspace;
 
@@ -18,15 +19,20 @@ namespace Thorn
 			ScanEntryAssembly();
 			UseDefaultConstructorToInstantiateExports();
 			UseTypeScanningConvention(new DefaultTypeScanningConvention());
-			UseMemberScanningConvention(new DefaultMemberScanningConvention());
 		}
 
 		public IEnumerable<ITypeSource> TypeSources { get { return _sources; } }
-		public IEnumerable<Type> AdditionalExports { get { return _specifiedExports; } }
+		public IEnumerable<Type> AdditionalTypes { get { return _specifiedTypes; } }
 		public ITypeScanningConvention TypeScanningConvention { get { return _typeScanningConvention; } }
-		public IMemberScanningConvention MemberScanningConvention { get { return _memberScanningConvention; } }
 		public ITypeInstantiationStrategy TypeInstantiationStrategy { get { return _typeInstantiationStrategy; } }
 		public string DefaultNamespace { get { return _defaultNamspace; } }
+
+		public IEnumerable<Export> AdditionalExports
+		{
+			get {
+				return _additionalExports;
+			}
+		}
 
 		public void ScanEntryAssembly()
 		{
@@ -61,11 +67,6 @@ namespace Thorn
 			_typeScanningConvention = typeScanningConvention;
 		}
 
-		public void UseMemberScanningConvention(IMemberScanningConvention memberScanningConvention)
-		{
-			_memberScanningConvention = memberScanningConvention;
-		}
-
 		public void Export<TExport>()
 		{
 			Export(typeof(TExport));
@@ -73,7 +74,12 @@ namespace Thorn
 
 		public void Export(Type type)
 		{
-			_specifiedExports.Add(type);
+			_specifiedTypes.Add(type);
+		}
+
+		public void Export(Export export)
+		{
+			_additionalExports.Add(export);
 		}
 
 		public void UseCommonServiceLocatorToInstantiateExports()

@@ -51,8 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\MemberScanning.cs" />
-    <Compile Include="Configuration\TypeScanning.cs" />
+    <Compile Include="Configuration\DefaultMemberScanningConventionSpec.cs" />
+    <Compile Include="Configuration\DefaultTypeScanningConfigurationSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\Routing.cs" />
     <Compile Include="ScanningFodder\Fodder.cs" />

@@ -1,12 +1,13 @@
 ﻿using System;
+using Microsoft.Practices.ServiceLocation;
 
-namespace Thorn
+namespace Thorn.Conventions
 {
 	internal class CommonServiceLocatorInstantiationStrategy : ITypeInstantiationStrategy
 	{
 		public object Instantiate(Type type)
 		{
-			throw new NotImplementedException();
+			return ServiceLocator.Current.GetInstance(type);
 		}
 	}
 }

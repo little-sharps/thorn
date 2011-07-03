@@ -1,5 +1,6 @@
-﻿using NUnit.Framework;
-using SharpTestsEx;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
+using Thorn.Config;
 
 namespace Thorn.Tests.Routing
 {
@@ -12,9 +13,10 @@ namespace Thorn.Tests.Routing
 		public void BeforeEach()
 		{
 			var type = typeof (ScanningFodder.Fodder);
-			var scanner = new DefaultMemberScanningConvention();
-			var config = new Thorn.Configuration();
-			config.AddExport(new Export(type, false, "fodder", scanner.GetActions(type)));
+			var config = new Config.Configuration();
+			var actions = new List<Export>();
+			actions.Add(new Export(type, type.GetMethod("Bantha"), "bantha"));
+			config.AddExport(new Scope("fodder", false, actions));
 
 			_router = new CommandRouter(config);
 		}

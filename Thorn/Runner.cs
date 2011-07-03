@@ -1,4 +1,5 @@
 ﻿using System;
+using Thorn.Config;
 
 namespace Thorn
 {

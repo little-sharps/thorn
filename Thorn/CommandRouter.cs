@@ -1,24 +1,27 @@
 ﻿using System;
+using System.Linq;
+using Thorn.Config;
+using Thorn.Exceptions;
 
 namespace Thorn
 {
-	public class CommandRouter
+	internal class CommandRouter
 	{
-		private Configuration _config;
+		private readonly RoutingInfo _routes;
 
-		public CommandRouter(Configuration config)
+		public CommandRouter(RoutingInfo routes)
 		{
-			_config = config;
+			_routes = routes;
 		}
 
-		public Action FindAction(string commandString)
+		public Export FindExport(string commandString)
 		{
 			var command = Command.Parse(commandString);
 
 			try
 			{
-				var @namespace = command.Namespace.HasValue() ? command.Namespace : _config.DefaultNamespace;
-				return _config.GetExportByNamespace(@namespace).GetActionByName(command.ActionName);
+				var @namespace = command.Namespace.HasValue() ? command.Namespace : _routes.DefaultNamespace;
+				return _routes.ExportsInNamespace(@namespace).Single(export => export.Name == command.ActionName);
 			}
 			catch (Exception)
 			{
