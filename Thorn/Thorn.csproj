@@ -42,18 +42,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Action.cs" />
+    <Compile Include="AssemblyScanTypeSource.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="CommandRouter.cs" />
+    <Compile Include="CommonServiceLocatorInstantiationStrategy.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="ConfigurationBuilder.cs" />
+    <Compile Include="ConfigurationPlan.cs" />
+    <Compile Include="DefaultConstructorInstantiationStrategy.cs" />
+    <Compile Include="DefaultMemberScanningConvention.cs" />
+    <Compile Include="DefaultTypeScanningConvention.cs" />
+    <Compile Include="Export.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="IConfigurationHelper.cs" />
+    <Compile Include="IMemberScanningConvention.cs" />
     <Compile Include="IPreprocessor.cs" />
+    <Compile Include="IRunner.cs" />
+    <Compile Include="ITypeInstantiationStrategy.cs" />
+    <Compile Include="ITypeScanningConvention.cs" />
     <Compile Include="Preprocessors\CommandHelpPreprocessor.cs" />
     <Compile Include="Preprocessors\IndexPreprocessor.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AssemblyScanner.cs" />
-    <Compile Include="RoutingInfo.cs" />
     <Compile Include="Runner.cs" />
+    <Compile Include="RunnerInternal.cs" />
     <Compile Include="ThornExportAttribute.cs" />
     <Compile Include="ThornIgnoreAttribute.cs" />
+    <Compile Include="ITypeSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

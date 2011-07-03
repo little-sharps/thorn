@@ -7,7 +7,14 @@ namespace Thorn.Preprocessors
 {
     public class CommandHelpPreprocessor : IPreprocessor
     {
-        public bool CanHandle(string[] args)
+    	private Configuration _config;
+
+    	public CommandHelpPreprocessor(Configuration config)
+    	{
+    		_config = config;
+    	}
+
+    	public bool CanHandle(string[] args)
         {
             return args.Length > 1 && args[0].ToLower() == "help";
         }
@@ -15,7 +22,7 @@ namespace Thorn.Preprocessors
         public void Handle(string[] args)
         {
             var commandName = args[1].ToLower();
-            var router = new CommandRouter(Configuration.GetConfiguredActions());
+            var router = new CommandRouter(_config);
 
             var action = router.FindAction(commandName);
 

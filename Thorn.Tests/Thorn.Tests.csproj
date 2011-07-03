@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\GettingExportedActions.cs" />
     <Compile Include="Configuration\MemberScanning.cs" />
     <Compile Include="Configuration\TypeScanning.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

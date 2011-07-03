@@ -6,34 +6,43 @@ using System.Text;
 
 namespace Thorn.Preprocessors
 {
-    public class IndexPreprocessor : IPreprocessor
-    {
-        public bool CanHandle(string[] args)
-        {
-            return args.Length == 0 || 
-                  (args.Length == 1 && args[0].ToLower() == "help");
-        }
+	public class IndexPreprocessor : IPreprocessor
+	{
+		private Configuration _config;
 
-        public void Handle(string[] args)
-        {
-            var executableName = Assembly.GetEntryAssembly().GetName().Name;
+		public IndexPreprocessor(Configuration config)
+		{
+			_config = config;
+		}
 
-            Console.WriteLine("Usage:");
-            Console.WriteLine("\t{0} [command] [/flag1 [flag1value]] [/flag2 [...]]...", executableName);
-            Console.WriteLine();
-            Console.WriteLine("{0} understands the following commands:", executableName);
+		public bool CanHandle(string[] args)
+		{
+			return args.Length == 0 || 
+				  (args.Length == 1 && args[0].ToLower() == "help");
+		}
 
-            var actions = Configuration.GetConfiguredActions();
+		public void Handle(string[] args)
+		{
+			var executableName = Assembly.GetEntryAssembly().GetName().Name;
 
-            foreach (var action in actions)
-            {
-                Console.WriteLine("\t{0}:{1}\t{2}", action.Type.Name.ToLower(), action.Method.Name.ToLower(), action.GetDescription());
-            }
+			Console.WriteLine("Usage:");
+			Console.WriteLine("\t{0} [command] [/flag1 [flag1value]] [/flag2 [...]]...", executableName);
+			Console.WriteLine();
+			Console.WriteLine("{0} understands the following commands:", executableName);
 
-            Console.WriteLine();
-            Console.WriteLine("For info on a particular command, try:");
-            Console.WriteLine("\t{0} help <command>", executableName);
-            Console.WriteLine();
-        }
-    }
+			var targets = from export in _config.Exports
+			              from action in export.Actions
+			              select new {export, action};
+
+			foreach (var target in targets)
+			{
+				Console.WriteLine("\t{0}:{1}\t{2}", target.export.Namespace, target.action.Name, target.action.GetDescription());
+			}
+
+			Console.WriteLine();
+			Console.WriteLine("For info on a particular command, try:");
+			Console.WriteLine("\t{0} help <command>", executableName);
+			Console.WriteLine();
+		}
+	}
 }

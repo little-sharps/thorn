@@ -8,142 +8,143 @@ using System.Text;
 
 namespace Thorn
 {
-    public class Action : IEquatable<Action>
-    {
-        private readonly Type _type;
-        private readonly MethodInfo _method;
+	public class Action : IEquatable<Action>
+	{
+		private readonly Type _type;
+		private readonly MethodInfo _method;
+		private readonly string _name;
 
-        public Action(Type type, MethodInfo method)
-        {
-            _type = type;
-            _method = method;
-        }
+		public Action(Type type, MethodInfo method, string name)
+		{
+			_type = type;
+			_method = method;
+			_name = name;
+		}
 
-        public Type Type
-        {
-            get { return _type; }
-        }
+		public string Name
+		{
+			get { return _name; }
+		}
 
-        public MethodInfo Method
-        {
-            get { return _method; }
-        }
+		public Type Type
+		{
+			get { return _type; }
+		}
 
-        internal ParameterInfo[] MethodParameters
-        {
-            get { return _method.GetParameters(); }
-        }
+		public MethodInfo Method
+		{
+			get { return _method; }
+		}
 
-        public RoutingInfo GetRoutingInfo()
-        {
-            return new RoutingInfo(Type.Name, Method.Name);
-        }
+		internal ParameterInfo[] MethodParameters
+		{
+			get { return _method.GetParameters(); }
+		}
 
-        public void Invoke(string[] args)
-        {
-            var parameters = new List<object>();
+		public void Invoke(object instance, string[] args)
+		{
+			var parameters = new List<object>();
 
-            if (MethodParameters.Length > 1)
-            {
-                throw new InvocationException("Unable to invoke method " + _type.FullName + "." + _method.Name + ". It has too many parameters. Please see the Thorn Readme on Bindable Parameters");
-            }
+			if (MethodParameters.Length > 1)
+			{
+				throw new InvocationException("Unable to invoke method " + _type.FullName + "." + _method.Name + ". It has too many parameters. Please see the Thorn Readme on Bindable Parameters");
+			}
 
-            if (MethodParameters.Length == 1)
-            {
-                parameters.Add(BuildInvocationParameter(MethodParameters[0].ParameterType, args));
-            }
-            
-            var instance = Activator.CreateInstance(_type);
-            _method.Invoke(instance, parameters.ToArray());
-        }
+			if (MethodParameters.Length == 1)
+			{
+				parameters.Add(BuildInvocationParameter(MethodParameters[0].ParameterType, args));
+			}
 
-        private object BuildInvocationParameter(Type type, string[] args)
-        {
-            return GetArgsModelBindingDefinitionForType(type).CreateAndBind(args);
-        }
+			_method.Invoke(instance, parameters.ToArray());
+		}
 
-        public string GetDescription()
-        {
-            DescriptionAttribute descriptionAttr = null;
-            foreach (var attribute in _method.GetCustomAttributes(typeof(DescriptionAttribute), false))
-            {
-                descriptionAttr = attribute as DescriptionAttribute;
-            }
+		private object BuildInvocationParameter(Type type, string[] args)
+		{
+			return GetArgsModelBindingDefinitionForType(type).CreateAndBind(args);
+		}
 
-            return descriptionAttr == null ? String.Empty : descriptionAttr.Description;
-        }
+		public string GetDescription()
+		{
+			DescriptionAttribute descriptionAttr = null;
+			foreach (var attribute in _method.GetCustomAttributes(typeof(DescriptionAttribute), false))
+			{
+				descriptionAttr = attribute as DescriptionAttribute;
+			}
 
-        public string GetHelp()
-        {
-            if (MethodParameters.Length == 1)
-            {
-                return GetArgsHelp();
-            }
-            return String.Empty;
-        }
+			return descriptionAttr == null ? String.Empty : descriptionAttr.Description;
+		}
 
-        private string GetArgsHelp()
-        {
-            var modelhelp =
-                new Args.Help.HelpProvider().GenerateModelHelp(
-                    GetArgsModelBindingDefinitionForType(MethodParameters[0].ParameterType));
+		public string GetHelp()
+		{
+			if (MethodParameters.Length == 1)
+			{
+				return GetArgsHelp();
+			}
+			return String.Empty;
+		}
 
-            var helpFormatter = new Args.Help.Formatters.ConsoleHelpFormatter(80, 1, 5);
+		private string GetArgsHelp()
+		{
+			var modelhelp =
+				new Args.Help.HelpProvider().GenerateModelHelp(
+					GetArgsModelBindingDefinitionForType(MethodParameters[0].ParameterType));
 
-            var sb = new StringBuilder();
-            using (var writer = new StringWriter(sb))
-            {
-                helpFormatter.WriteHelp(modelhelp, writer);
-                writer.Close();
-            }
-            return sb.ToString();
-        }
+			var helpFormatter = new Args.Help.Formatters.ConsoleHelpFormatter(80, 1, 5);
 
-        private dynamic GetArgsModelBindingDefinitionForType(Type type)
-        {
-            var genericConfigureMethod = typeof(Args.Configuration).GetMethods(BindingFlags.Static | BindingFlags.Public).AsQueryable()
-                .First(m => m.Name == "Configure" && m.GetParameters().Count() == 0);
+			var sb = new StringBuilder();
+			using (var writer = new StringWriter(sb))
+			{
+				helpFormatter.WriteHelp(modelhelp, writer);
+				writer.Close();
+			}
+			return sb.ToString();
+		}
 
-            var closedConfigureMethod = genericConfigureMethod.MakeGenericMethod(type);
+		private dynamic GetArgsModelBindingDefinitionForType(Type type)
+		{
+			var genericConfigureMethod = typeof(Args.Configuration).GetMethods(BindingFlags.Static | BindingFlags.Public).AsQueryable()
+				.First(m => m.Name == "Configure" && m.GetParameters().Count() == 0);
 
-            return closedConfigureMethod.Invoke(null, new object[0]);
-        }
+			var closedConfigureMethod = genericConfigureMethod.MakeGenericMethod(type);
 
-        #region Actions are equatable
-        
-        public bool Equals(Action other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return Equals(other._type, _type) && Equals(other._method, _method);
-        }
+			return closedConfigureMethod.Invoke(null, new object[0]);
+		}
 
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (Action)) return false;
-            return Equals((Action) obj);
-        }
+		#region Actions are equatable
+		
+		public bool Equals(Action other)
+		{
+			if (ReferenceEquals(null, other)) return false;
+			if (ReferenceEquals(this, other)) return true;
+			return Equals(other._type, _type) && Equals(other._method, _method);
+		}
 
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return (_type.GetHashCode()*397) ^ _method.GetHashCode();
-            }
-        }
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			if (obj.GetType() != typeof (Action)) return false;
+			return Equals((Action) obj);
+		}
 
-        public static bool operator ==(Action left, Action right)
-        {
-            return Equals(left, right);
-        }
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				return (_type.GetHashCode()*397) ^ _method.GetHashCode();
+			}
+		}
 
-        public static bool operator !=(Action left, Action right)
-        {
-            return !Equals(left, right);
-        }
+		public static bool operator ==(Action left, Action right)
+		{
+			return Equals(left, right);
+		}
 
-        #endregion
-    }
+		public static bool operator !=(Action left, Action right)
+		{
+			return !Equals(left, right);
+		}
+
+		#endregion
+	}
 }

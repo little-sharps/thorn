@@ -1,51 +1,51 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using NUnit.Framework;
 using SharpTestsEx;
 
 namespace Thorn.Tests.Configuration
 {
-    [TestFixture]
-    public class MemberScanning
-    {
-        [Test]
-        public void ItShouldLocatePublicMembers()
-        {
-            var scanner = new AssemblyScanner();
-            var type = typeof(ScanningFodder.Fodder);
+	[TestFixture]
+	public class DefaultMemberScanningConventionSpec
+	{
+		[Test]
+		public void ItShouldLocatePublicMembers()
+		{
+			var scanner = new DefaultMemberScanningConvention();
+			var type = typeof(ScanningFodder.Fodder);
 
-            MethodInfo[] methodsFound = scanner.GetRoutableMethodsOn(type);
+			var actions = scanner.GetActions(type);
 
-            var expected = type.GetMethod("Bantha");
+			var expected = type.GetMethod("Bantha");
 
-            methodsFound.Should().Contain(expected);
-        }
+			actions.Select(a => a.Method).Should().Contain(expected);
+		}
 
-        [Test]
-        public void ItShouldNotLocateInheritedMembers()
-        {
-            var scanner = new AssemblyScanner();
-            var type = typeof(ScanningFodder.Fodder);
+		[Test]
+		public void ItShouldNotLocateInheritedMembers()
+		{
+			var scanner = new DefaultMemberScanningConvention();
+			var type = typeof(ScanningFodder.Fodder);
 
-            MethodInfo[] methodsFound = scanner.GetRoutableMethodsOn(type);
+			var actions = scanner.GetActions(type);
 
-            var expected = type.GetMethod("ToString");
+			var expected = type.GetMethod("ToString");
 
-            methodsFound.Should().Not.Contain(expected);
-        }
+			actions.Select(a => a.Method).Should().Not.Contain(expected);
+		}
 
 
-        [Test]
-        public void ItShouldNotLocatePublicMembersDecoratedWithIgnoreAttribute()
-        {
-            var scanner = new AssemblyScanner();
-            var type = typeof(ScanningFodder.Fodder);
+		[Test]
+		public void ItShouldNotLocatePublicMembersDecoratedWithIgnoreAttribute()
+		{
+			var scanner = new DefaultMemberScanningConvention();
+			var type = typeof(ScanningFodder.Fodder);
 
-            MethodInfo[] methodsFound = scanner.GetRoutableMethodsOn(type);
+			var actions = scanner.GetActions(type);
+			var expected = type.GetMethod("Ignored");
 
-            var expected = type.GetMethod("Ignored");
+			actions.Select(a => a.Method).Should().Not.Contain(expected);
+		}
 
-            methodsFound.Should().Not.Contain(expected);
-        }
-
-    }
+	}
 }
