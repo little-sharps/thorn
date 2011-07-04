@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThornSample", "ThornSample\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thorn.Specs", "Thorn.Specs\Thorn.Specs.csproj", "{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThornSampleWithIoC", "IoCSample\ThornSampleWithIoC.csproj", "{7F5C80A9-47F2-4A21-AB7A-3DD6CD205650}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThornSampleWithIoC", "ThornSampleWithIoC\ThornSampleWithIoC.csproj", "{7F5C80A9-47F2-4A21-AB7A-3DD6CD205650}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
