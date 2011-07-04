@@ -39,18 +39,6 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.mocks">
-      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.mocks.dll</HintPath>
-    </Reference>
-    <Reference Include="pnunit.framework">
-      <HintPath>..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpTestsEx">
-      <HintPath>..\packages\SharpTestsEx.1.1.1\lib\SharpTestsEx.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -81,10 +69,6 @@
     <Compile Include="Conventions\ITypeInstantiationStrategy.cs" />
     <Compile Include="Conventions\ITypeScanningConvention.cs" />
     <Compile Include="CommandHelpPreprocessor.cs" />
-    <Compile Include="Specs\ScanningFodder\Fodder.cs" />
-    <Compile Include="Specs\ScanningFodder\NonFodder.cs" />
-    <Compile Include="Specs\Conventions\TypeScanning.cs" />
-    <Compile Include="Specs\Routing\Routing.cs" />
     <Compile Include="TypeScanner.cs" />
     <Compile Include="UsagePreprocessor.cs" />
     <Compile Include="Exceptions\InvocationException.cs" />
