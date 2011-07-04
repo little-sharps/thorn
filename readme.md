@@ -38,11 +38,11 @@ Exports.cs:
 		public string Target { get; set; }
 	}
 
-##### Run it at the commandline:
+### Run it at the commandline:
 	
 	C:\...\bin\Debug>MyApp hello /T World
 
-##### Get Usage Info:
+### Get Usage Info:
 	
 	C:\...\bin\Debug>MyApp help
 	C:\...\bin\Debug>MyApp help hello
@@ -68,7 +68,7 @@ Therefore there are a couple of simple requirements on exported types and method
 - Exported methods must be parameterless or have exactly 1 parameter
 - Parameter may be complex. See Args docs for details
 
-#### Overriding the defaults
+### Overriding the defaults
 
 You have the opportunity to bend and break a number of these rules. To set advanced 
 configuration options, use an initializer as below:
@@ -81,6 +81,15 @@ configuration options, use an initializer as below:
 	});
 
 	runner.Run(args);
+
+### Dependency Injection
+
+I often wish to have services injected into my exports. Luckily it's pretty easy. To wit:
+	
+	var runner = Thorn.Runner.Configure(config => {
+		config.UseCallbackToInstantiateExports(ObjectFactory.GetInstance);
+	});
+
 
 MIT License
 -----------
