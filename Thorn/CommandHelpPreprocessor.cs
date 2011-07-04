@@ -11,10 +11,14 @@ namespace Thorn
 			{
 				var commandName = args[1].ToLower();
 				var router = new CommandRouter(configuration.RoutingInfo);
-				var action = router.FindExport(commandName);
+				var export = router.FindExport(commandName);
 
-				Console.WriteLine("Help - {0} - {1}", commandName, action.Description);
-				Console.Write(configuration.ParameterHelpProvider.GetHelp(action.ParameterType));
+				Console.WriteLine("Help - {0}", commandName);
+				if (export.Description.HasValue())
+				{
+					Console.WriteLine("\t{0}", export.Description);
+				}
+				Console.Write(configuration.ParameterHelpProvider.GetHelp(export.ParameterType));
 				
 				return true; //handled
 			}

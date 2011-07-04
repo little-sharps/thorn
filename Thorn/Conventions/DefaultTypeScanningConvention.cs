@@ -42,7 +42,7 @@ namespace Thorn.Conventions
 				descriptionAttr = attribute as DescriptionAttribute;
 			}
 
-			return descriptionAttr == null ? String.Empty : descriptionAttr.Description;
+			return descriptionAttr == null ? null : descriptionAttr.Description;
 		}
 
 	}

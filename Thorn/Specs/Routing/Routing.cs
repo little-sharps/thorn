@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
+using SharpTestsEx;
 using Thorn.Config;
+using Thorn.Specs.ScanningFodder;
 
-namespace Thorn.Tests.Routing
+namespace Thorn.Specs.Routing
 {
 	[TestFixture]
 	public class Routing
@@ -12,33 +14,35 @@ namespace Thorn.Tests.Routing
 		[SetUp]
 		public void BeforeEach()
 		{
-			var type = typeof (ScanningFodder.Fodder);
-			var config = new Config.Configuration();
-			var actions = new List<Export>();
-			actions.Add(new Export(type, type.GetMethod("Bantha"), "bantha"));
-			config.AddExport(new Scope("fodder", false, actions));
+			var type = typeof (Fodder);
+			var exports = new List<Export>
+			              {
+			              	new Export(type, type.GetMethod("Bantha"), "fodder", "bantha")
+			              };
 
-			_router = new CommandRouter(config);
+			var routingInfo = new RoutingInfo(exports);
+
+			_router = new CommandRouter(routingInfo);
 		}
 
 		[Test]
 		public void ItShouldRouteASimpleCommandName()
 		{
 			var commandName = "bantha";
-			var expected = typeof (ScanningFodder.Fodder).GetMethod("Bantha");
+			var expected = typeof (Fodder).GetMethod("Bantha");
 
-			var action = _router.FindAction(commandName);
-			action.Method.Should().Be.EqualTo(expected);
+			var export = _router.FindExport(commandName);
+			export.Method.Should().Be.EqualTo(expected);
 		}
 
 		[Test]
 		public void ItShouldRouteAScopedCommandName()
 		{
 			var commandName = "fodder:bantha";
-			var expected = typeof(ScanningFodder.Fodder).GetMethod("Bantha");
+			var expected = typeof(Fodder).GetMethod("Bantha");
 
-			var action = _router.FindAction(commandName);
-			action.Method.Should().Be.EqualTo(expected);
+			var export = _router.FindExport(commandName);
+			export.Method.Should().Be.EqualTo(expected);
 		}
 
 	}

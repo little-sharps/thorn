@@ -23,11 +23,16 @@ namespace Thorn
 				{
 					if (export.Namespace == config.RoutingInfo.DefaultNamespace)
 					{
-						Console.WriteLine("  {0} - {1}", export.Name, export.Description);
+						Console.WriteLine("  {0}", export.Name);
 					}
 					else
 					{
-						Console.WriteLine("  {0}:{1} - {2}", export.Namespace, export.Name, export.Description);
+						Console.WriteLine("  {0}:{1}", export.Namespace, export.Name);
+					}
+
+					if (export.Description.HasValue())
+					{
+						Console.WriteLine("\t{0}", export.Description);
 					}
 				}
 

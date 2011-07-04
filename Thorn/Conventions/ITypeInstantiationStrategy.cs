@@ -2,7 +2,7 @@
 
 namespace Thorn.Conventions
 {
-	public interface ITypeInstantiationStrategy
+	internal interface ITypeInstantiationStrategy
 	{
 		object Instantiate(Type type);
 	}

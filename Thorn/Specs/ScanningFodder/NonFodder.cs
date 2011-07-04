@@ -1,4 +1,4 @@
-﻿namespace Thorn.Tests.ScanningFodder
+﻿namespace Thorn.Specs.ScanningFodder
 {
     public class NonFodder
     {

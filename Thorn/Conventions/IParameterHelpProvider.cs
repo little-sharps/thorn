@@ -2,7 +2,7 @@
 
 namespace Thorn.Conventions
 {
-	public interface IParameterHelpProvider
+	internal interface IParameterHelpProvider
 	{
 		string GetHelp(Type parameterType);
 	}

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thorn", "Thorn\Thorn.csproj", "{E2D067F2-271D-4CE0-9D65-E99E040718AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thorn.Tests", "Thorn.Tests\Thorn.Tests.csproj", "{364F2BF4-8347-46A9-B604-72D5F7895B9E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThornSample", "ThornSample\ThornSample.csproj", "{B6DA24A4-F7D3-41D5-A6B9-E1AC7DD8506A}"
 EndProject
 Global
@@ -27,16 +25,6 @@ Global
 		{E2D067F2-271D-4CE0-9D65-E99E040718AD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E2D067F2-271D-4CE0-9D65-E99E040718AD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E2D067F2-271D-4CE0-9D65-E99E040718AD}.Release|x86.ActiveCfg = Release|Any CPU
-		{364F2BF4-8347-46A9-B604-72D5F7895B9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{364F2BF4-8347-46A9-B604-72D5F7895B9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{364F2BF4-8347-46A9-B604-72D5F7895B9E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{364F2BF4-8347-46A9-B604-72D5F7895B9E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{364F2BF4-8347-46A9-B604-72D5F7895B9E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{364F2BF4-8347-46A9-B604-72D5F7895B9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{364F2BF4-8347-46A9-B604-72D5F7895B9E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{364F2BF4-8347-46A9-B604-72D5F7895B9E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{364F2BF4-8347-46A9-B604-72D5F7895B9E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{364F2BF4-8347-46A9-B604-72D5F7895B9E}.Release|x86.ActiveCfg = Release|Any CPU
 		{B6DA24A4-F7D3-41D5-A6B9-E1AC7DD8506A}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{B6DA24A4-F7D3-41D5-A6B9-E1AC7DD8506A}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{B6DA24A4-F7D3-41D5-A6B9-E1AC7DD8506A}.Debug|Mixed Platforms.Build.0 = Debug|x86

@@ -1,17 +1,30 @@
-﻿namespace Thorn.Tests.ScanningFodder
-{
-    [ThornExport]
-    public class Fodder
-    {
-        public void Bantha()
-        {
-            
-        }
+﻿using System.ComponentModel;
 
-        [ThornIgnore]
-        public void Ignored()
-        {
-            
-        }
-    }
+namespace Thorn.Specs.ScanningFodder
+{
+	[ThornExport]
+	public class Fodder
+	{
+		[Description("Bantha Description")]
+		public void Bantha()
+		{
+			
+		}
+
+		public void Hey(HeyOptions opts)
+		{
+			
+		}
+
+		[ThornIgnore]
+		public void Ignored()
+		{
+			
+		}
+
+		public class HeyOptions
+		{
+			public string ToWhom { get; set; }
+		}
+	}
 }

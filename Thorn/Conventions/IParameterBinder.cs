@@ -2,7 +2,7 @@
 
 namespace Thorn.Conventions
 {
-	public interface IParameterBinder
+	internal interface IParameterBinder
 	{
 		object BuildParameter(Type parameterType, string[] args);
 	}
