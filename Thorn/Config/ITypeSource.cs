@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Thorn.Config
 {
-	public interface ITypeSource
+	internal interface ITypeSource
 	{
 		IQueryable<Type> Types { get; }
 	}

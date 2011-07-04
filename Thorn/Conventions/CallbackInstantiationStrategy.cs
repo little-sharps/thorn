@@ -2,7 +2,7 @@
 
 namespace Thorn.Conventions
 {
-	public class CallbackInstantiationStrategy : ITypeInstantiationStrategy
+	internal class CallbackInstantiationStrategy : ITypeInstantiationStrategy
 	{
 		private Func<Type,object> _callback;
 

@@ -5,7 +5,7 @@ using Thorn.Exceptions;
 
 namespace Thorn.Config
 {
-	public class RoutingInfo
+	internal class RoutingInfo
 	{
 		private string _defaultNamespace;
 		private readonly IDictionary<string, IList<Export>> _exports = new Dictionary<string, IList<Export>>();

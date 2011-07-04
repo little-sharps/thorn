@@ -5,7 +5,7 @@ using Thorn.Exceptions;
 
 namespace Thorn
 {
-	public class CommandRouter
+	internal class CommandRouter
 	{
 		private readonly RoutingInfo _routes;
 
