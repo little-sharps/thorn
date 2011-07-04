@@ -5,9 +5,9 @@ A command line utility accelerator.
 In 30 secs
 ----------
 For building a "Tasks" style command line utility. To wit:
- 1. In VS2010, Create a new "Console Application" project.
- 2. Reference Thorn. (NuGet coming soon)
- 3. Make your code look like this:
+1. In VS2010, Create a new "Console Application" project.
+2. Reference Thorn. (NuGet coming soon)
+3. Make your code look like this:
 
 Program.cs:
 
@@ -25,15 +25,23 @@ Exports.cs:
 	public class Exports
 	{
 		[Description("Says 'Hello'")]
-		public void Hello()
+		public void Hello(HelloOptions opts)
 		{
-			Console.WriteLine("Hello");
+			Console.WriteLine("Hello, {0}!", opts.Target);
 		}
 	}
 
- 4. Run it in the command window:
-	C:\...\bin\Debug>MyApp.exe hello
+	public class HelloOptions
+	{
+		[Description("Object of the salutation")]
+		public string Target { get; set; }
+	}
 
- 5. Get Usage Info:
+4. Run it in the command window:
+	
+	C:\...\bin\Debug>MyApp.exe hello /T World
+
+5. Get Usage Info:
+	
 	C:\...\bin\Debug>MyApp.exe help
 	C:\...\bin\Debug>MyApp.exe help hello
