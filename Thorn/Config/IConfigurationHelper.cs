@@ -17,8 +17,8 @@ namespace Thorn.Config
 		void Export(Type type);
 		void Export(Export export);
 
-		void UseCommonServiceLocatorToInstantiateExports();
 		void UseDefaultConstructorToInstantiateExports();
+		void UseCallbackToInstantiateExports(Func<Type, object> callback);
 
 		void SetDefaultNamespace(string @namespace);
 	}

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThornSample", "ThornSample\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thorn.Specs", "Thorn.Specs\Thorn.Specs.csproj", "{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThornSampleWithIoC", "IoCSample\ThornSampleWithIoC.csproj", "{7F5C80A9-47F2-4A21-AB7A-3DD6CD205650}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}.Release|x86.ActiveCfg = Release|Any CPU
+		{7F5C80A9-47F2-4A21-AB7A-3DD6CD205650}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{7F5C80A9-47F2-4A21-AB7A-3DD6CD205650}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{7F5C80A9-47F2-4A21-AB7A-3DD6CD205650}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{7F5C80A9-47F2-4A21-AB7A-3DD6CD205650}.Debug|x86.ActiveCfg = Debug|x86
+		{7F5C80A9-47F2-4A21-AB7A-3DD6CD205650}.Debug|x86.Build.0 = Debug|x86
+		{7F5C80A9-47F2-4A21-AB7A-3DD6CD205650}.Release|Any CPU.ActiveCfg = Release|x86
+		{7F5C80A9-47F2-4A21-AB7A-3DD6CD205650}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{7F5C80A9-47F2-4A21-AB7A-3DD6CD205650}.Release|Mixed Platforms.Build.0 = Release|x86
+		{7F5C80A9-47F2-4A21-AB7A-3DD6CD205650}.Release|x86.ActiveCfg = Release|x86
+		{7F5C80A9-47F2-4A21-AB7A-3DD6CD205650}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

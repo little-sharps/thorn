@@ -82,14 +82,14 @@ namespace Thorn.Config
 			_additionalExports.Add(export);
 		}
 
-		public void UseCommonServiceLocatorToInstantiateExports()
-		{
-			_typeInstantiationStrategy = new CommonServiceLocatorInstantiationStrategy();
-		}
-
 		public void UseDefaultConstructorToInstantiateExports()
 		{
 			_typeInstantiationStrategy = new DefaultConstructorInstantiationStrategy();
+		}
+
+		public void UseCallbackToInstantiateExports(Func<Type, object> callback)
+		{
+			_typeInstantiationStrategy = new CallbackInstantiationStrategy(callback);
 		}
 
 		public void SetDefaultNamespace(string @namespace)

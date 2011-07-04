@@ -36,9 +36,6 @@
       <HintPath>..\packages\Args.1.0.3\lib\Net40\Args.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -46,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CommandProcessor.cs" />
     <Compile Include="Conventions\ArgsHelpProvider.cs" />
+    <Compile Include="Conventions\CallbackInstantiationStrategy.cs" />
     <Compile Include="Conventions\IParameterBinder.cs" />
     <Compile Include="Conventions\IParameterHelpProvider.cs" />
     <Compile Include="Exceptions\ConfigurationException.cs" />
@@ -56,7 +54,6 @@
     <Compile Include="Config\AssemblyScanTypeSource.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandRouter.cs" />
-    <Compile Include="Conventions\CommonServiceLocatorInstantiationStrategy.cs" />
     <Compile Include="Config\Configuration.cs" />
     <Compile Include="Config\ConfigurationBuilder.cs" />
     <Compile Include="Config\ConfigurationPlan.cs" />
