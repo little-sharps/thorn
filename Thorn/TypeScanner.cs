@@ -6,7 +6,7 @@ using Thorn.Conventions;
 
 namespace Thorn
 {
-	internal class TypeScanner
+	public class TypeScanner
 	{
 		private readonly ITypeScanningConvention _convention;
 

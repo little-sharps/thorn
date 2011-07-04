@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Thorn.Config
 {
-	internal class AssemblyScanTypeSource : ITypeSource
+	public class AssemblyScanTypeSource : ITypeSource
 	{
 		public AssemblyScanTypeSource(Assembly assembly, string @namespace)
 		{

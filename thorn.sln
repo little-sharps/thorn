@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thorn", "Thorn\Thorn.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThornSample", "ThornSample\ThornSample.csproj", "{B6DA24A4-F7D3-41D5-A6B9-E1AC7DD8506A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thorn.Specs", "Thorn.Specs\Thorn.Specs.csproj", "{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{B6DA24A4-F7D3-41D5-A6B9-E1AC7DD8506A}.Release|Mixed Platforms.Build.0 = Release|x86
 		{B6DA24A4-F7D3-41D5-A6B9-E1AC7DD8506A}.Release|x86.ActiveCfg = Release|x86
 		{B6DA24A4-F7D3-41D5-A6B9-E1AC7DD8506A}.Release|x86.Build.0 = Release|x86
+		{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3ADDD326-C58E-4645-ADC2-DBF21EEBAA1E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

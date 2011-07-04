@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Thorn.Conventions
 {
-	internal class DefaultTypeScanningConvention : ITypeScanningConvention
+	public class DefaultTypeScanningConvention : ITypeScanningConvention
 	{
 		public IQueryable<Type> TypesToExport(IQueryable<Type> typesToScan)
 		{
