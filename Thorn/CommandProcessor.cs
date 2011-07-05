@@ -1,25 +1,31 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Thorn.Config;
+using Thorn.Conventions;
 
 namespace Thorn
 {
 	internal class CommandProcessor
 	{
-		public void Handle(Configuration config, string[] args)
+		private readonly CommandRouter _router;
+		private readonly ITypeInstantiationStrategy _instantiationStrategy;
+		private readonly IParameterBinder _parameterBinder;
+
+		public CommandProcessor(CommandRouter router, ITypeInstantiationStrategy instantiationStrategy, IParameterBinder parameterBinder)
 		{
-			var command = args[0].ToLower();
-			args = args.Skip(1).ToArray();
+			_router = router;
+			_parameterBinder = parameterBinder;
+			_instantiationStrategy = instantiationStrategy;
+		}
 
-			var router = new CommandRouter(config.RoutingInfo);
-			var export = router.FindExport(command);
+		public void Handle(Command cmd)
+		{
+			var export = _router.FindExport(cmd);
 
-			var target = config.InstantiationStrategy.Instantiate(export.Type);
+			var target = _instantiationStrategy.Instantiate(export.Type);
 			
 			var parameters = new List<object>();
 			if (export.ParameterType != null)
 			{
-				parameters.Add(config.ParameterBinder.BuildParameter(export.ParameterType, args));
+				parameters.Add(_parameterBinder.BuildParameter(export.ParameterType, cmd.Args));
 			}
 			
 			export.Method.Invoke(target, parameters.ToArray());

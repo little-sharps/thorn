@@ -1,14 +1,25 @@
-﻿namespace Thorn
+﻿using System.Linq;
+
+namespace Thorn
 {
 	internal class Command
 	{
-		private readonly string _ns;
-		private readonly string _actionName;
+		private string _commandString;
+		private string _ns;
+		private string _name;
+		private string[] _args;
 
-		public Command(string @namespace, string actionName)
+		public Command(string commandString, string ns, string name, string[] args)
 		{
-			_ns = @namespace;
-			_actionName = actionName;
+			_commandString = commandString;
+			_ns = ns;
+			_name = name;
+			_args = args;
+		}
+
+		public string CommandString
+		{
+			get { return _commandString; }
 		}
 
 		public string Namespace
@@ -16,30 +27,40 @@
 			get { return _ns; }
 		}
 
-		public string ActionName
+		public string Name
 		{
-			get { return _actionName; }
+			get { return _name; }
 		}
 
-		public static Command Parse(string commandString)
+		public string[] Args
 		{
-			string @namespace = null;
-			string actionName;
+			get { return _args; }
+		}
 
-			commandString = commandString.ToLower();
+		public static Command Parse(string[] rawargs)
+		{
+			string commandString = null;
+			string ns = null;
+			string name = null;
+			var args = new string[0];
 
-			if (commandString.Contains(":"))
+			if (rawargs.Length > 0)
 			{
-				var parts = commandString.Split(':');
-				@namespace = parts[0];
-				actionName = parts[1];
-			}
-			else
-			{
-				actionName = commandString;
-			}
+				commandString = rawargs.First().ToLower();
+				args = rawargs.Skip(1).ToArray();
 
-			return new Command(@namespace, actionName);
+				if (commandString.Contains(":"))
+				{
+					var parts = commandString.Split(':');
+					ns = parts[0];
+					name = parts[1];
+				}
+				else
+				{
+					name = commandString;
+				}
+			}
+			return new Command(commandString, ns, name, args);
 		}
 	}
 }

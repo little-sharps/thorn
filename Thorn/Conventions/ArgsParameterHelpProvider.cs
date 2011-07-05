@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Thorn.Conventions
 {
-	class ArgsHelpProvider : IParameterHelpProvider
+	class ArgsParameterHelpProvider : IParameterHelpProvider
 	{
 		public string GetHelp(Type parameterType)
 		{

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Thorn.Config;
 using Thorn.Conventions;
 
-namespace Thorn
+namespace Thorn.Config
 {
 	internal class TypeScanner
 	{

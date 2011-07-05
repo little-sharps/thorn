@@ -7,25 +7,28 @@ namespace Thorn
 {
 	internal class CommandRouter
 	{
-		private readonly RoutingInfo _routes;
+		private readonly RoutingInfo _routingInfo;
 
-		public CommandRouter(RoutingInfo routes)
+		public CommandRouter(RoutingInfo routingInfo)
 		{
-			_routes = routes;
+			_routingInfo = routingInfo;
 		}
 
-		public Export FindExport(string commandString)
+		public RoutingInfo RoutingInfo
 		{
-			var command = Command.Parse(commandString);
+			get { return _routingInfo; }
+		}
 
+		public Export FindExport(Command command)
+		{
 			try
 			{
-				var @namespace = command.Namespace.HasValue() ? command.Namespace : _routes.DefaultNamespace;
-				return _routes.ExportsInNamespace(@namespace).Single(export => export.Name == command.ActionName);
+				var @namespace = command.Namespace.HasValue() ? command.Namespace : _routingInfo.DefaultNamespace;
+				return _routingInfo.ExportsInNamespace(@namespace).Single(export => export.Name == command.Name);
 			}
 			catch (Exception)
 			{
-				throw new RoutingException(commandString);
+				throw new RoutingException(command.CommandString);
 			}
 		}
 

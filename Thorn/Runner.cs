@@ -12,7 +12,7 @@ namespace Thorn
 
 		public static IRunner Configure(Action<IConfigurationHelper> configurator = null)
 		{
-			return new RunnerInternal(ConfigurationBuilder.Build(configurator));
+			return Builder.BuildRunner(configurator);
 		}
 	}
 }

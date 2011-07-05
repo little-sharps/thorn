@@ -26,22 +26,22 @@ namespace Thorn.Specs.Routing
 		}
 
 		[Test]
-		public void ItShouldRouteASimpleCommandName()
+		public void ItShouldRouteASimpleCommand()
 		{
-			var commandName = "bantha";
+			var command = new Command("bantha", null, "bantha", new string[0]);
 			var expected = typeof (Fodder).GetMethod("Bantha");
 
-			var export = _router.FindExport(commandName);
+			var export = _router.FindExport(command);
 			export.Method.Should().Be.EqualTo(expected);
 		}
 
 		[Test]
-		public void ItShouldRouteAScopedCommandName()
+		public void ItShouldRouteAScopedCommand()
 		{
-			var commandName = "fodder:bantha";
+			var command = new Command("fodder:bantha", "fodder", "bantha", new string[0]);
 			var expected = typeof(Fodder).GetMethod("Bantha");
 
-			var export = _router.FindExport(commandName);
+			var export = _router.FindExport(command);
 			export.Method.Should().Be.EqualTo(expected);
 		}
 

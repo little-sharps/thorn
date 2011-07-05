@@ -1,32 +1,44 @@
 ﻿using System;
-using Thorn.Config;
 using Thorn.Exceptions;
 
 namespace Thorn
 {
 	internal class RunnerInternal : IRunner
 	{
-		private readonly Configuration _config;
+		private readonly HelpProvider _helpProvider;
+		private readonly CommandProcessor _commandProcessor;
 
-		internal RunnerInternal(Configuration config)
+		public RunnerInternal(HelpProvider helpProvider, CommandProcessor commandProcessor)
 		{
-			_config = config;
+			_helpProvider = helpProvider;
+			_commandProcessor = commandProcessor;
 		}
 
 		public void Run(string[] args)
 		{
 			try
 			{
-				_config.AssertConfigurationIsValid();
-				var handled = new UsagePreprocessor().Handle(_config, args);
-				if (!handled) handled = new CommandHelpPreprocessor().Handle(_config, args);
-				if (!handled) new CommandProcessor().Handle(_config, args);
-			}
-			catch (RoutingException ex)
-			{
-				Console.WriteLine("Command not found - {0}", ex.Command);
-			}
+				var cmd = Command.Parse(args);
 
+				if (_helpProvider.CanHandle(cmd))
+				{
+					_helpProvider.Handle(cmd);
+				}
+				else
+				{
+					_commandProcessor.Handle(cmd);
+				}
+			}
+			catch (RoutingException)
+			{
+				Console.WriteLine("Unable to locate command");
+				_helpProvider.PrintUsage();
+			}
+			catch (InvocationException)
+			{
+				Console.WriteLine("Unable to execute command");
+				_helpProvider.PrintUsage();
+			}
 		}
 	}
 }

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Args;
 
-namespace Thorn
+namespace Thorn.Conventions
 {
 	internal static class ArgsHelper
 	{

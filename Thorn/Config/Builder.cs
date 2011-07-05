@@ -4,24 +4,27 @@ using Thorn.Conventions;
 
 namespace Thorn.Config
 {
-	internal class ConfigurationBuilder
+	internal class Builder
 	{
-		public static Configuration Build(Action<IConfigurationHelper> configurator)
+		public static IRunner BuildRunner(Action<IConfigurationHelper> configurator)
 		{
 			var configPlan = new ConfigurationPlan();
-			
+
 			if (configurator != null)
 			{
 				configurator(configPlan);
 			}
-			
-			return Build(configPlan);
+
+			var routingInfo = GetRoutingInfo(configPlan);
+			var router = new CommandRouter(routingInfo);
+			var helpProvider = new HelpProvider(router, new ArgsParameterHelpProvider());
+			var cmdProcessor = new CommandProcessor(router, configPlan.TypeInstantiationStrategy, new ArgsParameterBinder());
+
+			return new RunnerInternal(helpProvider, cmdProcessor);
 		}
 
-		private static Configuration Build(ConfigurationPlan configPlan)
+		private static RoutingInfo GetRoutingInfo(ConfigurationPlan configPlan)
 		{
-			var config = new Configuration();
-
 			var exports = new List<Export>();
 			var typeScanner = new TypeScanner(configPlan.TypeScanningConvention);
 
@@ -40,15 +43,7 @@ namespace Thorn.Config
 				exports.Add(export);
 			}
 
-			config.RoutingInfo = new RoutingInfo(exports, configPlan.DefaultNamespace);
-
-			config.InstantiationStrategy = configPlan.TypeInstantiationStrategy;
-			config.ParameterHelpProvider = new ArgsHelpProvider();
-			config.ParameterBinder = new ArgsParameterBinder();
-
-			return config;
+			return new RoutingInfo(exports, configPlan.DefaultNamespace);
 		}
-
-		
 	}
 }
