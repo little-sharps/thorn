@@ -20,7 +20,7 @@ namespace Thorn.Specs.Routing
 			              	new Export(type, type.GetMethod("Bantha"), "fodder", "bantha")
 			              };
 
-			var routingInfo = new RoutingInfo(exports);
+			var routingInfo = new RoutingInfo(exports, "fodder");
 
 			_router = new CommandRouter(routingInfo);
 		}
