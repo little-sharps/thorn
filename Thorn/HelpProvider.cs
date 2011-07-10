@@ -8,6 +8,7 @@ namespace Thorn
 	{
 		private readonly CommandRouter _router;
 		private readonly IParameterHelpProvider _parameterHelpProvider;
+		private readonly string _executableName = Assembly.GetEntryAssembly().GetName().Name;
 
 		public HelpProvider(CommandRouter router, IParameterHelpProvider parameterHelpProvider)
 		{
@@ -27,7 +28,10 @@ namespace Thorn
 				var referencedCommand = Command.Parse(cmd.Args);
 				PrintCommandHelp(referencedCommand);
 			}
-			PrintUsage();
+			else
+			{
+				PrintUsage();
+			}
 		}
 
 		public void PrintCommandHelp(Command cmd)
@@ -44,13 +48,11 @@ namespace Thorn
 
 		public void PrintUsage()
 		{
-			var executableName = Assembly.GetEntryAssembly().GetName().Name;
-
 			Console.WriteLine();
 			Console.WriteLine("Usage:");
-			Console.WriteLine("  {0} [command] [/flag1 [flag1value]] [/flag2 [...]]...", executableName);
+			Console.WriteLine("  {0} [command] [/flag1 [flag1value]] [/flag2 [...]]...", _executableName);
 			Console.WriteLine();
-			Console.WriteLine("{0} understands the following commands:", executableName);
+			Console.WriteLine("{0} understands the following commands:", _executableName);
 			Console.WriteLine();
 
 			foreach (var export in _router.RoutingInfo.Exports)
@@ -71,7 +73,13 @@ namespace Thorn
 			}
 
 			Console.WriteLine();
-			Console.WriteLine("For info on a particular command, try: '{0} help <command>'", executableName);
+			Console.WriteLine("For info on a particular command, try: '{0} help <command>'", _executableName);
+		}
+
+		public void PrintHint()
+		{
+			Console.WriteLine();
+			Console.WriteLine("For more info, try: '{0} help'", _executableName);
 		}
 	}
 }

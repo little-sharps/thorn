@@ -12,7 +12,16 @@ namespace Thorn
 
 		public static IRunner Configure(Action<IConfigurationHelper> configurator = null)
 		{
-			return Builder.BuildRunner(configurator);
+			try
+			{
+				return Builder.BuildRunner(configurator);
+			}
+			catch (ConfigurationException ex)
+			{
+				Console.WriteLine("Unable to create runner. A problem has been detected in your configuration:");
+				Console.WriteLine(ex.Message);
+				throw;
+			}
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Thorn.Conventions;
 
 namespace Thorn
@@ -20,12 +21,30 @@ namespace Thorn
 		{
 			var export = _router.FindExport(cmd);
 
-			var target = _instantiationStrategy.Instantiate(export.Type);
+			object target = null;
+			
+			try
+			{
+				target = _instantiationStrategy.Instantiate(export.Type);
+			}
+			catch(Exception ex)
+			{
+				var msg = string.Format("Unable to instantiate type {0}", export.Type.FullName);
+				throw new InvocationException(msg, ex);
+			}
 			
 			var parameters = new List<object>();
 			if (export.ParameterType != null)
 			{
-				parameters.Add(_parameterBinder.BuildParameter(export.ParameterType, cmd.Args));
+				try
+				{
+					parameters.Add(_parameterBinder.BuildParameter(export.ParameterType, cmd.Args));
+				}
+				catch (Exception ex)
+				{
+					var msg = string.Format("Unable to bind parameter type {0}", export.ParameterType.FullName);
+					throw new InvocationException(msg, ex);
+				}
 			}
 			
 			export.Method.Invoke(target, parameters.ToArray());

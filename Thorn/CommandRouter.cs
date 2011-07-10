@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Thorn.Config;
-using Thorn.Exceptions;
 
 namespace Thorn
 {

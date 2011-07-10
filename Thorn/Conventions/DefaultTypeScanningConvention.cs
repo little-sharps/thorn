@@ -6,16 +6,16 @@ using System.Reflection;
 
 namespace Thorn.Conventions
 {
-	internal class DefaultTypeScanningConvention : ITypeScanningConvention
+	public class DefaultTypeScanningConvention : ITypeScanningConvention
 	{
-		public IQueryable<Type> TypesToExport(IQueryable<Type> typesToScan)
+		public virtual IQueryable<Type> TypesToExport(IQueryable<Type> typesToScan)
 		{
 			return from type in typesToScan
 			       where type.GetCustomAttributes(false).Any(attr => attr is ThornExportAttribute)
 			       select type;
 		}
 
-		public IEnumerable<MethodInfo> MethodsToExport(Type type)
+		public virtual IEnumerable<MethodInfo> MethodsToExport(Type type)
 		{
 			return type.GetMethods().AsQueryable()
 				.Where(m => m.DeclaringType == type)
@@ -24,17 +24,17 @@ namespace Thorn.Conventions
 				);
 		}
 
-		public string GetNamespace(Type type, MethodInfo methodInfo)
+		public virtual string GetNamespace(Type type, MethodInfo methodInfo)
 		{
 			return type.Name.ToLower();
 		}
 
-		public string GetName(Type type, MethodInfo methodInfo)
+		public virtual string GetName(Type type, MethodInfo methodInfo)
 		{
 			return methodInfo.Name.ToLower();
 		}
 
-		public string GetDescription(Type type, MethodInfo methodInfo)
+		public virtual string GetDescription(Type type, MethodInfo methodInfo)
 		{
 			DescriptionAttribute descriptionAttr = null;
 			foreach (var attribute in methodInfo.GetCustomAttributes(typeof(DescriptionAttribute), false))

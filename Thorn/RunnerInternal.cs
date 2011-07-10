@@ -1,5 +1,4 @@
 ﻿using System;
-using Thorn.Exceptions;
 
 namespace Thorn
 {
@@ -29,15 +28,19 @@ namespace Thorn
 					_commandProcessor.Handle(cmd);
 				}
 			}
-			catch (RoutingException)
+			catch (RoutingException ex)
 			{
-				Console.WriteLine("Unable to locate command");
-				_helpProvider.PrintUsage();
+				Console.WriteLine("Unable to locate command '{0}'", ex.Command);
+				_helpProvider.PrintHint();
 			}
-			catch (InvocationException)
+			catch (InvocationException ex)
 			{
-				Console.WriteLine("Unable to execute command");
-				_helpProvider.PrintUsage();
+				Console.WriteLine("Unable to execute command: {0}", ex.Message);
+				if(ex.InnerException != null)
+				{
+					Console.WriteLine();
+					Console.WriteLine(ex.InnerException.ToString());
+				}
 			}
 		}
 	}

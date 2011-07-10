@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using Thorn.Exceptions;
 
 namespace Thorn.Config
 {
@@ -65,15 +64,9 @@ namespace Thorn.Config
 			}
 			if (methodParameters.Length == 1)
 			{
-				var type = methodParameters[0].ParameterType;
-				if (!type.IsClass)
+				if (!ParameterType.IsClass)
 				{
 					throw new ConfigurationException(String.Format("The method {0}.{1} cannot be exported, it's argument type is not a class.", Type.FullName, Method.Name));
-				}
-				var constructors = type.GetConstructors(BindingFlags.Public);
-				if (constructors.Length > 0 && !constructors.Any(ci => ci.GetParameters().Length == 0))
-				{
-					throw new ConfigurationException(String.Format("The method {0}.{1} cannot be exported, it's argument type does not have a default public constructor.", Type.FullName, Method.Name));
 				}
 			}
 		}

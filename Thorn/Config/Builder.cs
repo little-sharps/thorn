@@ -15,7 +15,12 @@ namespace Thorn.Config
 				configurator(configPlan);
 			}
 
+			configPlan.Validate();
+
 			var routingInfo = GetRoutingInfo(configPlan);
+
+			routingInfo.Validate();
+
 			var router = new CommandRouter(routingInfo);
 			var helpProvider = new HelpProvider(router, new ArgsParameterHelpProvider());
 			var cmdProcessor = new CommandProcessor(router, configPlan.TypeInstantiationStrategy, new ArgsParameterBinder());

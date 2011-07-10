@@ -96,5 +96,18 @@ namespace Thorn.Config
 		{
 			_defaultNamspace = @namespace;
 		}
+
+		public void Validate()
+		{
+			if (_typeInstantiationStrategy == null)
+			{
+				throw new ConfigurationException("Instantiation strategy is required, but was set to null.");
+			}
+
+			if (_typeScanningConvention == null)
+			{
+				throw new ConfigurationException("Type scanning convention is required, but was set to null.");
+			}
+		}
 	}
 }

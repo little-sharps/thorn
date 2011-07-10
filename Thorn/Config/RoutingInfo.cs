@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Thorn.Exceptions;
 
 namespace Thorn.Config
 {
@@ -61,7 +60,7 @@ namespace Thorn.Config
 			return null;
 		}
 
-		public void AssertConfigurationIsValid()
+		public void Validate()
 		{
 			if (_exports.Values.Sum(list => list.Count) == 0)
 				throw new ConfigurationException("Nothing has been exported. Did you mark your class with a [ThornExport] attribute?");
