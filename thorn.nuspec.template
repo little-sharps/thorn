@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>thorn</id>
+    <version>::patch_level::</version>
+    <authors>Jace Bennett</authors>
+    <owners>Jace Bennett</owners>
+    <licenseUrl>http://github.com/bnwasteland/thorn/raw/LICENSE.txt</licenseUrl>
+    <projectUrl>http://github.com/bnwasteland/thorn</projectUrl>
+    <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A commandline utility accelerator for "Tasks" style utilities.</description>
+    <tags>command line cli utility args argument arguments parser</tags>
+    <dependencies>
+      <dependency id="Args" version="::args_version::" />
+    </dependencies>
+  </metadata>
+</package>

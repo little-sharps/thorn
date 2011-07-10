@@ -23,6 +23,4 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-/Args.dll
-/Thorn.dll
-/StructureMap.dll
+pkg/
