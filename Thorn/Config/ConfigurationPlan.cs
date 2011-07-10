@@ -13,26 +13,23 @@ namespace Thorn.Config
 		ITypeScanningConvention _typeScanningConvention;
 		ITypeInstantiationStrategy _typeInstantiationStrategy;
 		string _defaultNamspace;
+		string _switchDelimiter;
 
 		public ConfigurationPlan()
 		{
 			ScanEntryAssembly();
 			UseDefaultConstructorToInstantiateExports();
 			UseTypeScanningConvention(new DefaultTypeScanningConvention());
+			UseDefaultSwitchDelimiter();
 		}
 
 		public IEnumerable<ITypeSource> TypeSources { get { return _sources; } }
 		public IEnumerable<Type> AdditionalTypes { get { return _specifiedTypes; } }
+		public IEnumerable<Export> AdditionalExports { get { return _additionalExports; } }
 		public ITypeScanningConvention TypeScanningConvention { get { return _typeScanningConvention; } }
 		public ITypeInstantiationStrategy TypeInstantiationStrategy { get { return _typeInstantiationStrategy; } }
 		public string DefaultNamespace { get { return _defaultNamspace; } }
-
-		public IEnumerable<Export> AdditionalExports
-		{
-			get {
-				return _additionalExports;
-			}
-		}
+		public string SwitchDelimiter { get { return _switchDelimiter; } }
 
 		public void ScanEntryAssembly()
 		{
@@ -95,6 +92,16 @@ namespace Thorn.Config
 		public void SetDefaultNamespace(string @namespace)
 		{
 			_defaultNamspace = @namespace;
+		}
+
+		public void UseDefaultSwitchDelimiter()
+		{
+			_switchDelimiter = null;
+		}
+
+		public void UseDashForSwitchDelimiter()
+		{
+			_switchDelimiter = "-";
 		}
 
 		public void Validate()

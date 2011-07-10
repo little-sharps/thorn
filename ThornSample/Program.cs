@@ -9,7 +9,7 @@ namespace ThornSample
 	{
 		static void Main(string[] args)
 		{
-			Thorn.Runner.Run(args);
+			Thorn.Runner.Configure(c => c.UseDashForSwitchDelimiter()).Run(args);
 		}
 	}
 }

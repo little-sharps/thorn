@@ -21,5 +21,7 @@ namespace Thorn.Config
 		void UseCallbackToInstantiateExports(Func<Type, object> callback);
 
 		void SetDefaultNamespace(string @namespace);
+		void UseDefaultSwitchDelimiter();
+		void UseDashForSwitchDelimiter();
 	}
 }

@@ -22,8 +22,13 @@ namespace Thorn.Config
 			routingInfo.Validate();
 
 			var router = new CommandRouter(routingInfo);
-			var helpProvider = new HelpProvider(router, new ArgsParameterHelpProvider());
-			var cmdProcessor = new CommandProcessor(router, configPlan.TypeInstantiationStrategy, new ArgsParameterBinder());
+			
+			var argsHelper = new ArgsHelper(configPlan.SwitchDelimiter);
+			var argsHelpProvider = new ArgsParameterHelpProvider(argsHelper);
+			var argsParameterBinder = new ArgsParameterBinder(argsHelper);
+
+			var helpProvider = new HelpProvider(router, argsHelpProvider);
+			var cmdProcessor = new CommandProcessor(router, configPlan.TypeInstantiationStrategy, argsParameterBinder);
 
 			return new RunnerInternal(helpProvider, cmdProcessor);
 		}

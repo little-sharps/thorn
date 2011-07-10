@@ -37,12 +37,6 @@ namespace Thorn
 		public void PrintCommandHelp(Command cmd)
 		{
 			var export = _router.FindExport(cmd);
-
-			Console.WriteLine("Help - {0}:{1}", export.Namespace, export.Name);
-			if (export.Description.HasValue())
-			{
-				Console.WriteLine("\t{0}", export.Description);
-			}
 			Console.Write(_parameterHelpProvider.GetHelp(export.ParameterType));
 		}
 

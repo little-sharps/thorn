@@ -6,6 +6,13 @@ namespace Thorn.Conventions
 {
 	class ArgsParameterHelpProvider : IParameterHelpProvider
 	{
+		private readonly ArgsHelper _argsHelper;
+
+		public ArgsParameterHelpProvider(ArgsHelper argsHelper)
+		{
+			_argsHelper = argsHelper;
+		}
+
 		public string GetHelp(Type parameterType)
 		{
 			var sb = new StringBuilder();
@@ -17,7 +24,8 @@ namespace Thorn.Conventions
 			else
 			{
 				var provider = new Args.Help.HelpProvider();
-				var modelhelp = provider.GenerateModelHelp(ArgsHelper.GetArgsModelBindingDefinitionForType(parameterType));
+				var bindingDefinition = _argsHelper.GetArgsModelBindingDefinitionForType(parameterType);
+				var modelhelp = provider.GenerateModelHelp(bindingDefinition);
 
 				var helpFormatter = new Args.Help.Formatters.ConsoleHelpFormatter(80, 1, 5);
 
