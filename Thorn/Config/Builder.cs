@@ -37,6 +37,7 @@ namespace Thorn.Config
 		{
 			var exports = new List<Export>();
 			var typeScanner = new TypeScanner(configPlan.TypeScanningConvention);
+			string defaultNamespace = null;
 
 			foreach (var source in configPlan.TypeSources)
 			{
@@ -53,7 +54,12 @@ namespace Thorn.Config
 				exports.Add(export);
 			}
 
-			return new RoutingInfo(exports, configPlan.DefaultNamespace);
+			if (configPlan.DefaultType != null)
+			{
+				defaultNamespace = configPlan.TypeScanningConvention.GetNamespace(configPlan.DefaultType);
+			}
+
+			return new RoutingInfo(exports, defaultNamespace);
 		}
 	}
 }

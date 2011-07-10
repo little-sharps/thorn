@@ -39,7 +39,7 @@ namespace Thorn.Config
 			return new Export(  
 								type, 
 								method, 
-								_convention.GetNamespace(type, method), 
+								_convention.GetNamespace(type), 
 								_convention.GetName(type, method), 
 								_convention.GetDescription(type, method)
 							 );

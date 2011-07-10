@@ -10,7 +10,7 @@ namespace Thorn.Conventions
 		IQueryable<Type> TypesToExport(IQueryable<Type> typesToScan);
 		IEnumerable<MethodInfo> MethodsToExport(Type type);
 
-		string GetNamespace(Type type, MethodInfo methodInfo);
+		string GetNamespace(Type type);
 		string GetName(Type type, MethodInfo methodInfo);
 		string GetDescription(Type type, MethodInfo methodInfo);
 	}

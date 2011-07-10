@@ -16,10 +16,6 @@ namespace Thorn.Config
 			{
 				AddExport(export);
 			}
-			if (_defaultNamespace == null)
-			{
-				_defaultNamespace = DetermineDefaultNamespace();
-			}
 		}
 
 		public string DefaultNamespace
@@ -49,15 +45,6 @@ namespace Thorn.Config
 				_exports[export.Namespace] = new List<Export>();
 			}
 			_exports[export.Namespace].Add(export);
-		}
-
-		private string DetermineDefaultNamespace()
-		{
-			if (_exports.Keys.Count == 1)
-			{
-				return _exports.Keys.Single();
-			}
-			return null;
 		}
 
 		public void Validate()

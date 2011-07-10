@@ -20,7 +20,9 @@ namespace Thorn.Config
 		void UseDefaultConstructorToInstantiateExports();
 		void UseCallbackToInstantiateExports(Func<Type, object> callback);
 
-		void SetDefaultNamespace(string @namespace);
+		void SetDefaultType<T>();
+		void SetDefaultType(Type type);
+
 		void UseDefaultSwitchDelimiter();
 		void UseDashForSwitchDelimiter();
 	}

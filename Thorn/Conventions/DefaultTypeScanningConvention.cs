@@ -24,7 +24,7 @@ namespace Thorn.Conventions
 				);
 		}
 
-		public virtual string GetNamespace(Type type, MethodInfo methodInfo)
+		public virtual string GetNamespace(Type type)
 		{
 			return type.Name.ToLower();
 		}
