@@ -26,7 +26,7 @@ namespace :ci do
 	
 	desc "Write version info into assembly"
 	assemblyinfo :write_version do |asm|
-		pathch_level = '1.0.0'
+		patch_level = '1.0.0'
 		build_number = ENV['BUILD_NUMBER'] || "0"
 		version_string = "#{patch_level}.#{build_number}"
 		asm.version = version_string
