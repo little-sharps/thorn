@@ -4,10 +4,10 @@ A command line utility accelerator.
 
 In 30 secs
 ----------
-For building a "Tasks" style command line utility. To wit:
+For building a "Tasks" style command line utility.
 	
 1. In VS2010, Create a new "Console Application" project.
-2. Reference Thorn. (NuGet coming soon)
+2. Install "thorn" from nuget
 3. Make your code look like this:
 
 Program.cs:
@@ -20,10 +20,10 @@ Program.cs:
 		}
 	}
 
-Exports.cs:
+Protocol.cs:
 
 	[ThornExport]
-	public class Exports
+	public class Protocol
 	{
 		[Description("Says 'Hello'")]
 		public void Hello(HelloOptions opts)
@@ -40,16 +40,23 @@ Exports.cs:
 
 ### Run it at the commandline:
 	
-	C:\...\bin\Debug>MyApp hello /T World
+	C:\...\bin\Debug>MyApp protocol:hello -t world
 
 ### Get Usage Info:
 	
 	C:\...\bin\Debug>MyApp help
-	C:\...\bin\Debug>MyApp help hello
+	C:\...\bin\Debug>MyApp help protocol:hello
 
 In 2 Minutes
 ------------
-To facilitate zero-friction "exports to commandline", Thorn makes a few assumptions.
+Thorn essentially provides a lightweight routing and dispatch layer to you own code. The 
+point is to encourage exporting small chunks of domain functionality to the commandline
+where it can be used by the myriad mature system tools out there (instead of building your
+own buggy scheduler service... again). Such an environment also serves as a good springboard 
+for experimentation, and ensures that one-offs that work out are already built in a repeatable, 
+deployable, reusable fashion. 
+
+To facilitate zero-friction "exports to the commandline", Thorn makes a few assumptions.
 
 First it discovers types and methods to be exported via a reflection scan. The default
 convention scans the entry assembly for types marked with the `[ThornExport]` attribute
@@ -90,6 +97,22 @@ I often wish to have services injected into my exports. Luckily it's pretty easy
 		config.UseCallbackToInstantiateExports(ObjectFactory.GetInstance);
 	});
 
+### A word on namespaces
+Thorn uses the names of types as namespaces, and the names of methods as actions. By
+default, a namespace will be required to call an action or get help for it. You can 
+configure a "default type" as below, and then call actions on that type without a namespace.
+
+So, modifying the 30 second example to
+	
+	Thorn.Runner.Configure(config => config.SetDefaultType<Protocol>).Run(args);
+would allow commandline syntax like
+	
+	C:\...\bin\Debug>MyApp hello -t world
+and
+	
+	C:\...\bin\Debug>MyApp help hello
+
+**It is never wrong to use the namespace for a command**
 
 MIT License
 -----------

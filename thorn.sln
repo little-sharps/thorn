@@ -12,8 +12,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2AA5A5E1-1BA3-4419-B175-C2440990A188}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE.txt = LICENSE.txt
+		rakefile.rb = rakefile.rb
 		readme.md = readme.md
-		pkg\thorn.nuspec = pkg\thorn.nuspec
+		thorn.nuspec.template = thorn.nuspec.template
 	EndProjectSection
 EndProject
 Global
