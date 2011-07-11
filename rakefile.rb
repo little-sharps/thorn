@@ -1,7 +1,7 @@
 require 'albacore'
 
 @settings = {
-	:patch_level => '1.0.0',
+	:patch_level => '1.0.1',
 	:config => :Debug
 }
 
