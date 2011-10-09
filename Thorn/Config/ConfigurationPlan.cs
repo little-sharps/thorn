@@ -21,7 +21,7 @@ namespace Thorn.Config
 			ScanEntryAssembly();
 			UseDefaultConstructorToInstantiateExports();
 			UseTypeScanningConvention(new DefaultTypeScanningConvention());
-			UseDefaultSwitchDelimiter();
+			UseDashForSwitchDelimiter();
 		}
 
 		public IEnumerable<ITypeSource> TypeSources
@@ -124,12 +124,17 @@ namespace Thorn.Config
 
 		public void UseDefaultSwitchDelimiter()
 		{
-			_switchDelimiter = null;
+			UseDashForSwitchDelimiter();
 		}
 
 		public void UseDashForSwitchDelimiter()
 		{
 			_switchDelimiter = "-";
+		}
+
+		public void UseSlashForSwitchDelimiter()
+		{
+			_switchDelimiter = "/";
 		}
 
 		public void Validate()

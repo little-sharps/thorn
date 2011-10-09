@@ -117,6 +117,7 @@ Changelog
 ---------
 ####1.0.1: 
 - Deprecating DoNotScan() in lieu of a more precise DoNotScanEntryAssembly()
+- Defaulting to a more bash-friendly "-" as the default switch delimeter. You can change it back with a call to UseSlashForSwitchDelimeter()
 
 
 MIT License
