@@ -49,12 +49,11 @@ Protocol.cs:
 
 In 2 Minutes
 ------------
-Thorn essentially provides a lightweight routing and dispatch layer to you own code. The 
-point is to encourage exporting small chunks of domain functionality to the commandline
-where it can be used by the myriad mature system tools out there (instead of building your
-own buggy scheduler service... again). Such an environment also serves as a good springboard 
-for experimentation, and ensures that one-offs that work out are already built in a repeatable, 
-deployable, reusable fashion. 
+Thorn essentially provides a lightweight routing and dispatch layer to you own code. Such 
+an environment encourages a style of development which relies on application-aware utilities, 
+and also serves as a good springboard for experimentation, and ensures that one-offs that 
+work out are already built in a repeatable, deployable, reusable fashion. In short, your 
+admins will love you.
 
 To facilitate zero-friction "exports to the commandline", Thorn makes a few assumptions.
 
@@ -104,7 +103,7 @@ configure a "default type" as below, and then call actions on that type without 
 
 So, modifying the 30 second example to
 	
-	Thorn.Runner.Configure(config => config.SetDefaultType<Protocol>).Run(args);
+	Thorn.Runner.Configure(config => config.SetDefaultType<Protocol>()).Run(args);
 would allow commandline syntax like
 	
 	C:\...\bin\Debug>MyApp hello -t world
