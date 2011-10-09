@@ -116,6 +116,7 @@ and
 Changelog
 ---------
 ####1.0.1: 
+- Moved home to littlebits on github. Updated project links. 
 - Deprecating DoNotScan() in lieu of a more precise DoNotScanEntryAssembly()
 
 
