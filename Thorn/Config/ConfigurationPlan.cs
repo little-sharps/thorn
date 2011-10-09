@@ -12,6 +12,7 @@ namespace Thorn.Config
 		readonly List<Export> _additionalExports = new List<Export>();
 		ITypeScanningConvention _typeScanningConvention;
 		ITypeInstantiationStrategy _typeInstantiationStrategy;
+		private bool _scanEntryAssembly;
 		Type _defaultType;
 		string _switchDelimiter;
 
@@ -23,7 +24,21 @@ namespace Thorn.Config
 			UseDefaultSwitchDelimiter();
 		}
 
-		public IEnumerable<ITypeSource> TypeSources { get { return _sources; } }
+		public IEnumerable<ITypeSource> TypeSources
+		{
+			get
+			{
+				if (_scanEntryAssembly)
+				{
+					yield return new AssemblyScanTypeSource(Assembly.GetEntryAssembly(), null);
+				}
+				foreach (var typeSource in _sources)
+				{
+					yield return typeSource;
+				}
+			}
+		}
+
 		public IEnumerable<Type> AdditionalTypes { get { return _specifiedTypes; } }
 		public IEnumerable<Export> AdditionalExports { get { return _additionalExports; } }
 		public ITypeScanningConvention TypeScanningConvention { get { return _typeScanningConvention; } }
@@ -33,7 +48,19 @@ namespace Thorn.Config
 
 		public void ScanEntryAssembly()
 		{
-			Scan(Assembly.GetEntryAssembly(), null);
+			_scanEntryAssembly = true;
+		}
+
+		public void DoNotScanEntryAssembly()
+		{
+			_scanEntryAssembly = false;
+		}
+
+		[Obsolete("Use method DoNotScanEntryAssembly() instead", false)]
+		public void DoNotScan()
+		{
+			Console.WriteLine("DEPRECATED: In Thorn configuration, change DoNotScan() to DoNotScanEntryAssembly()");
+			DoNotScanEntryAssembly();
 		}
 
 		public void Scan(Assembly assembly)
@@ -54,10 +81,6 @@ namespace Thorn.Config
 			}
 		}
 
-		public void DoNotScan()
-		{
-			_sources.Clear();
-		}
 
 		public void UseTypeScanningConvention(ITypeScanningConvention typeScanningConvention)
 		{

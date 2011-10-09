@@ -25,5 +25,6 @@ namespace Thorn.Config
 
 		void UseDefaultSwitchDelimiter();
 		void UseDashForSwitchDelimiter();
+		void DoNotScanEntryAssembly();
 	}
 }

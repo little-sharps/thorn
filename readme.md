@@ -113,6 +113,12 @@ and
 
 **It is never wrong to use the namespace for a command**
 
+Changelog
+---------
+####1.0.1: 
+- Deprecating DoNotScan() in lieu of a more precise DoNotScanEntryAssembly()
+
+
 MIT License
 -----------
 Copyright (c) 2011 Jace Bennett and contributors
