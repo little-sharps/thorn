@@ -57,7 +57,7 @@ namespace :ci do
 	end
 
 	task :package_stage => ["ci:compile", "ci:ensure_package_folder", "ci:nuspec"] do
-		cp "Thorn/bin/#{@settings[:config]}/Thorn.dll", "pkg/lib"
+		cp "Thorn/bin/#{@settings[:config]}/Thorn.dll", "pkg/lib/Net40"
 	end
 	
 	task :nuspec => ["ci:ensure_package_folder"] do
@@ -73,6 +73,7 @@ namespace :ci do
 	task :ensure_package_folder do
 		ensure_folder "pkg"
 		ensure_folder "pkg/lib"
+        ensure_folder "pkg/lib/Net40"
 	end
 	
 	task :package_clean do
